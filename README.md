@@ -1,12 +1,33 @@
 ![Icon](icon.png) RxDiffUtil
 ============================
-[![Build][1]][2] [![Release][3]][4]
+[![Build][1]][2]
+[![Release][3]][4]
 
-*RxDiffUtil*
+*RxDiffUtil* is an Rx wrapper around the Android [DiffUtil] library for the
+`RecyclerView` widget. It handles threading and reacts to concurrent changes
+to the adapter with a `ConcurrentModificationException`.
+
+All computation is done on the thread defined by the upstream `Observable`,
+while the application of the diff result and all terminal events are
+propagated on the Android main thread.
+
+The resulting `Completable` expects upstream to honor backpressure and shares
+the subscription to reduce concurrent changes to the adapter.
 
 
 Usage
 -----
+
+Convert any `Observable` to a `Completable` applying all changes as diff to the
+provided adapter.
+
+    service.observeData()
+           .subscribeOn(Schedulers.compute())
+           .onBackpressureLatest()
+           .to(RxDiffUtil.with(adapter))
+           .calculateDiff(callback))
+           .applyDiff(AdapterImpl::setUnsafe)
+           .subscribe();
 
 
 Installation
@@ -39,3 +60,4 @@ License
   [2]: https://travis-ci.org/volders/RxDiffUtil
   [3]: https://jitpack.io/v/berlin.volders/rxdiffutil.svg
   [4]: https://jitpack.io/#berlin.volders/rxdiffutil
+  [DiffUtil]: https://developer.android.com/reference/android/support/v7/util/DiffUtil.html
