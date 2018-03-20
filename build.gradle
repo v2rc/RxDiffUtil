@@ -1,31 +1,28 @@
 buildscript {
     repositories {
+        google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     }
 }
 
 allprojects {
     repositories {
+        google()
         jcenter()
-        maven { url "https://maven.google.com" }
     }
 }
 
 ext {
-    androidSupportVersion = '25.4.0'
-    xBuildToolsVersion = '25.0.3'
-    xTargetSdkVersion = 25
+    androidSupportVersion = '27.1.0'
+    xBuildToolsVersion = '27.0.3'
+    xTargetSdkVersion = 27
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5.1'
 }

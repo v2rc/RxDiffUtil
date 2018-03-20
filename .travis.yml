@@ -1,31 +1,39 @@
 language: android
 jdk: oraclejdk8
 
-android:
-  components:
-    - tools
-    - tools
-    - platform-tools
-    - build-tools-25.0.3
-    - android-25
-    - extra-android-m2repository
-
 git:
   depth: 3
 
 branches:
   only:
-    - dev
-    - 1.x
     - 2.x
+    - 1.x
+    - dev
+
+
+android:
+  components:
+    - tools
+    - emulator
+    - android-19
+    - android-27
+    - platform-tools
+    - build-tools-27.0.3
+    - sys-img-armeabi-v7a-android-19
+
 
 before_install:
-  - gradle :wrapper --configure-on-demand
-
-before_script:
   - echo no | android create avd -f -n test -t android-19 -b armeabi-v7a
   - emulator -avd test -no-window &
+  - gradle -b wrapper.gradle
+
+
+before_script:
   - android-wait-for-emulator
+
+after_script:
+  - cat */build/reports/lint-results.xml
+
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -36,3 +44,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
+
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

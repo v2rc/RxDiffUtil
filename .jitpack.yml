@@ -1,2 +1,2 @@
 before_install:
-  - gradle :wrapper --configure-on-demand
+  - gradle -b wrapper.gradle
