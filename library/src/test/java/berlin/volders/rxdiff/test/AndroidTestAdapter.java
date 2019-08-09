@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff;
+package berlin.volders.rxdiff.test;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import berlin.volders.rxdiff.RxDiffUtil;
 import rx.Observer;
 import rx.functions.Action2;
 import rx.functions.Func1;
@@ -31,15 +32,14 @@ import rx.subjects.ReplaySubject;
 
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 
-@SuppressWarnings("WeakerAccess")
-class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
+public class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
         Func1<AndroidTestAdapter<T>, T>, Action2<AndroidTestAdapter<T>, T>,
         RxDiffUtil.Callback<AndroidTestAdapter<T>, T>, RxDiffUtil.Callback2<T> {
 
-    final ReplaySubject<T> ts = ReplaySubject.create();
-    final Func1<T, Integer> sizeOf;
+    private final ReplaySubject<T> ts = ReplaySubject.create();
+    private final Func1<T, Integer> sizeOf;
 
-    AndroidTestAdapter(Func1<T, Integer> sizeOf) {
+    public AndroidTestAdapter(Func1<T, Integer> sizeOf) {
         this.ts.onNext(null);
         this.sizeOf = sizeOf;
     }
@@ -83,11 +83,11 @@ class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return new AndroidTestDiffUtilCallback<>(oldData, newData, sizeOf);
     }
 
-    void subscribe(Observer<T> subscriber) {
+    public void subscribe(Observer<T> subscriber) {
         ts.skip(1).subscribe(subscriber);
     }
 
-    Func1<AndroidTestAdapter<T>, T> notifyOnGet() {
+    public Func1<AndroidTestAdapter<T>, T> notifyOnGet() {
         return new Func1<AndroidTestAdapter<T>, T>() {
             @Override
             public T call(AndroidTestAdapter<T> adapter) {

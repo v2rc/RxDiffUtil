@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff;
+package berlin.volders.rxdiff.test;
 
 import androidx.recyclerview.widget.DiffUtil;
 
 import rx.functions.Func1;
 
-@SuppressWarnings("WeakerAccess")
 class AndroidTestDiffUtilCallback<T> extends DiffUtil.Callback {
 
-    final T oldData;
-    final T newData;
-    final Func1<T, Integer> sizeOf;
+    private final T oldData;
+    private final T newData;
+    private final Func1<T, Integer> sizeOf;
 
     AndroidTestDiffUtilCallback(T oldData, T newData, Func1<T, Integer> sizeOf) {
         this.oldData = oldData;

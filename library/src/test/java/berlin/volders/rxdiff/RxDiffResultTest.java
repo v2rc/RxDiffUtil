@@ -30,6 +30,7 @@ import java.lang.ref.WeakReference;
 import java.util.ConcurrentModificationException;
 
 import berlin.volders.rxdiff.RxDiffUtil.Callback;
+import berlin.volders.rxdiff.test.AndroidSchedulersTestHook;
 import rx.Producer;
 import rx.functions.Action2;
 import rx.observers.TestSubscriber;

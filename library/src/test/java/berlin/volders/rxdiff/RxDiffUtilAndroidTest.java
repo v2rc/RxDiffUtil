@@ -18,18 +18,23 @@ package berlin.volders.rxdiff;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import berlin.volders.rxdiff.test.AndroidTestAdapter;
+import berlin.volders.rxdiff.test.AndroidTestFunction;
 import rx.Completable;
 import rx.Observable;
 import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
 @SuppressWarnings({"unchecked", "WeakerAccess"})
+@RunWith(RobolectricTestRunner.class)
 public class RxDiffUtilAndroidTest {
 
     static final Func1<List<String>, Integer> listSize = new Func1<List<String>, Integer>() {

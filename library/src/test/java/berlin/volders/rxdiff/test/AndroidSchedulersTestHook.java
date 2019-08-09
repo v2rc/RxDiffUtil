@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff;
+package berlin.volders.rxdiff.test;
 
 import rx.Scheduler;
 import rx.android.plugins.RxAndroidPlugins;
 import rx.android.plugins.RxAndroidSchedulersHook;
 import rx.schedulers.Schedulers;
 
-class AndroidSchedulersTestHook extends RxAndroidSchedulersHook {
+public class AndroidSchedulersTestHook extends RxAndroidSchedulersHook {
 
     static {
         RxAndroidPlugins.getInstance().registerSchedulersHook(new AndroidSchedulersTestHook());
@@ -32,7 +32,7 @@ class AndroidSchedulersTestHook extends RxAndroidSchedulersHook {
         return Schedulers.immediate();
     }
 
-    static void innit() {
+    public static void innit() {
     }
 
     private AndroidSchedulersTestHook() {

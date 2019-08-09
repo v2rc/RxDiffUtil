@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff;
+package berlin.volders.rxdiff.test;
 
+import berlin.volders.rxdiff.RxDiffUtil;
 import rx.Completable;
 import rx.Observable;
 import rx.functions.Func1;
 
-@SuppressWarnings("WeakerAccess")
-class AndroidTestFunction<T> implements Func1<Observable<T>, Completable> {
+public class AndroidTestFunction<T> implements Func1<Observable<T>, Completable> {
 
-    final AndroidTestAdapter<T> adapter;
+    private final AndroidTestAdapter<T> adapter;
     private final Func1<AndroidTestAdapter<T>, T> object;
 
-    AndroidTestFunction(AndroidTestAdapter<T> adapter, Func1<AndroidTestAdapter<T>, T> object) {
+    public AndroidTestFunction(AndroidTestAdapter<T> adapter, Func1<AndroidTestAdapter<T>, T> object) {
         this.adapter = adapter;
         this.object = object;
     }

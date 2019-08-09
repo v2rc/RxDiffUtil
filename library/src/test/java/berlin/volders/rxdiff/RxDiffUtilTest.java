@@ -30,6 +30,7 @@ import java.lang.ref.WeakReference;
 
 import berlin.volders.rxdiff.RxDiffUtil.Callback;
 import berlin.volders.rxdiff.RxDiffUtil.Callback2;
+import berlin.volders.rxdiff.test.AndroidSchedulersTestHook;
 import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 import rx.subjects.PublishSubject;
