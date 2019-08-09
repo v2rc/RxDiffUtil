@@ -16,9 +16,9 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ConcurrentModificationException;
 
@@ -37,6 +37,7 @@ import rx.functions.Action2;
  * @param <T> type of the data set
  * @param <A> type of the adapter
  */
+@SuppressWarnings("WeakerAccess")
 public class RxDiffResult<A extends RecyclerView.Adapter, T> {
 
     @VisibleForTesting

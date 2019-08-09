@@ -25,10 +25,11 @@ import java.lang.ref.WeakReference;
 
 import berlin.volders.rxdiff.RxDiffUtil.Callback;
 
-import static android.support.v7.widget.RecyclerView.Adapter;
+import static androidx.recyclerview.widget.RecyclerView.Adapter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+@SuppressWarnings("unchecked")
 @RunWith(MockitoJUnitRunner.class)
 public class OnCalculateDiffTest {
 
@@ -38,7 +39,7 @@ public class OnCalculateDiffTest {
     Callback callback;
 
     @Test
-    public void call() throws Exception {
+    public void call() {
         OnCalculateDiff calculateDiff
                 = new OnCalculateDiff(new WeakReference(adapter), callback, false);
 

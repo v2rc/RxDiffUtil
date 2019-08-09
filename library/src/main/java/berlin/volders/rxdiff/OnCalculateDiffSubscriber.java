@@ -16,8 +16,8 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import java.lang.ref.WeakReference;
 

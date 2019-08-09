@@ -16,8 +16,8 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +39,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 @RunWith(MockitoJUnitRunner.class)
 public class OnCalculateDiffResultTest {
 
@@ -60,78 +61,78 @@ public class OnCalculateDiffResultTest {
     }
 
     @Test
-    public void applyDiff() throws Exception {
+    public void applyDiff() {
         result.applyDiff(Actions.empty());
 
         verify(producer).request(anyLong());
     }
 
     @Test(expected = ConcurrentModificationException.class)
-    public void applyDiff_concurrently() throws Exception {
+    public void applyDiff_concurrently() {
         result.onChanged();
 
         result.applyDiff(Actions.empty());
     }
 
     @Test
-    public void onChanged() throws Exception {
+    public void onChanged() {
         result.onChanged();
 
         assertThat(result.invalidated, is(true));
     }
 
     @Test
-    public void onItemRangeChanged() throws Exception {
+    public void onItemRangeChanged() {
         result.onItemRangeChanged(0, 1);
 
         assertThat(result.invalidated, is(true));
     }
 
     @Test
-    public void onItemRangeChanged_payload() throws Exception {
+    public void onItemRangeChanged_payload() {
         result.onItemRangeChanged(0, 1, null);
 
         assertThat(result.invalidated, is(true));
     }
 
     @Test
-    public void onItemRangeInserted() throws Exception {
+    public void onItemRangeInserted() {
         result.onItemRangeInserted(0, 1);
 
         assertThat(result.invalidated, is(true));
     }
 
     @Test
-    public void onItemRangeRemoved() throws Exception {
+    public void onItemRangeRemoved() {
         result.onItemRangeRemoved(0, 1);
 
         assertThat(result.invalidated, is(true));
     }
 
     @Test
-    public void onItemRangeMoved() throws Exception {
+    public void onItemRangeMoved() {
         result.onItemRangeMoved(0, 1, 2);
 
         assertThat(result.invalidated, is(true));
     }
 
     @Test
-    public void nonLeaking() throws Exception {
+    public void nonLeaking() {
         assertThat(OnCalculateDiffResult.nonLeaking(new WeakReference<>(adapter)), is(adapter));
     }
 
     @Test(expected = RxDiffUtil.SubscriptionLeak.class)
-    public void nonLeaking_leaking() throws Exception {
+    public void nonLeaking_leaking() {
         OnCalculateDiffResult.nonLeaking(new WeakReference(null));
     }
 
     @Test
-    public void checkConcurrency() throws Exception {
+    public void checkConcurrency() {
         result.checkConcurrency(adapter);
     }
 
     @Test(expected = ConcurrentModificationException.class)
-    public void checkConcurrency_changed() throws Exception {
+    public void checkConcurrency_changed() {
         result.onChanged();
 
         result.checkConcurrency(adapter);

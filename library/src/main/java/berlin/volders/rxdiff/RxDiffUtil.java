@@ -16,10 +16,10 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import java.lang.ref.WeakReference;
 
@@ -45,10 +45,11 @@ import rx.functions.Func1;
  * @param <T> type of the data set
  * @param <A> type of the adapter
  */
+@SuppressWarnings("WeakerAccess")
 public class RxDiffUtil<A extends Adapter, T> {
 
     final WeakReference<A> adapter;
-    final Observable<T> o;
+    private final Observable<T> o;
 
     RxDiffUtil(WeakReference<A> adapter, Observable<T> o) {
         this.adapter = adapter;

@@ -16,8 +16,8 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +36,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 @RunWith(MockitoJUnitRunner.class)
 public class OnCalculateDiffSubscriberTest {
 
@@ -57,7 +58,7 @@ public class OnCalculateDiffSubscriberTest {
     }
 
     @Test
-    public void onNext() throws Exception {
+    public void onNext() {
         String value = "foobar";
 
         diff.onNext(value);
@@ -72,7 +73,7 @@ public class OnCalculateDiffSubscriberTest {
     }
 
     @Test
-    public void onCompleted() throws Exception {
+    public void onCompleted() {
         diff.onCompleted();
 
         subscriber.assertNoErrors();
@@ -81,7 +82,7 @@ public class OnCalculateDiffSubscriberTest {
     }
 
     @Test
-    public void onError() throws Exception {
+    public void onError() {
         Throwable e = new Throwable();
 
         diff.onError(e);

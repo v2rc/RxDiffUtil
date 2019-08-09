@@ -16,9 +16,9 @@ android:
     - tools
     - emulator
     - android-19
-    - android-27
+    - android-29
     - platform-tools
-    - build-tools-27.0.3
+    - build-tools-28.0.3
     - sys-img-armeabi-v7a-android-19
 
 

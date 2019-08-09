@@ -16,16 +16,14 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import rx.functions.Action1;
 import rx.functions.Action2;
 
 class OnApplyDiff<A extends Adapter, T> implements Action1<OnCalculateDiffResult<A, T>> {
 
-    @VisibleForTesting
-    final Action2<? super A, ? super T> onUpdate;
+    private final Action2<? super A, ? super T> onUpdate;
 
     OnApplyDiff(Action2<? super A, ? super T> onUpdate) {
         this.onUpdate = onUpdate;

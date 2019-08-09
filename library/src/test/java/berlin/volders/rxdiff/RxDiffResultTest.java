@@ -16,8 +16,8 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -39,6 +39,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 @RunWith(MockitoJUnitRunner.class)
 public class RxDiffResultTest {
 
@@ -71,7 +72,7 @@ public class RxDiffResultTest {
     }
 
     @Test
-    public void applyDiff() throws Exception {
+    public void applyDiff() {
         rxDiffResult.applyDiff(action).subscribe(subscriber);
 
         emitResult(1);
@@ -85,7 +86,7 @@ public class RxDiffResultTest {
     }
 
     @Test
-    public void applyDiff_concurrently() throws Exception {
+    public void applyDiff_concurrently() {
         rxDiffResult.applyDiff(action).subscribe(subscriber);
         rxDiffResult.applyDiff(action).subscribe(subscriber);
         emitResult(1);

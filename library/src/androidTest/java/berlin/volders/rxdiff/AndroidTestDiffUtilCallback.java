@@ -16,10 +16,11 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.v7.util.DiffUtil;
+import androidx.recyclerview.widget.DiffUtil;
 
 import rx.functions.Func1;
 
+@SuppressWarnings("WeakerAccess")
 class AndroidTestDiffUtilCallback<T> extends DiffUtil.Callback {
 
     final T oldData;

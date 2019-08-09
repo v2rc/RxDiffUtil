@@ -16,8 +16,8 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -41,6 +41,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 @RunWith(MockitoJUnitRunner.class)
 public class RxDiffUtilTest {
 
@@ -74,7 +75,7 @@ public class RxDiffUtilTest {
     }
 
     @Test
-    public void calculateDiff_callback() throws Exception {
+    public void calculateDiff_callback() {
         Object o = 1;
 
         RxDiffResult rxDiffResult = rxDiffUtil.calculateDiff(callback);
@@ -92,7 +93,7 @@ public class RxDiffUtilTest {
     }
 
     @Test
-    public void calculateDiff_callback_detectMoves() throws Exception {
+    public void calculateDiff_callback_detectMoves() {
         Object o = 1;
 
         RxDiffResult rxDiffResult = rxDiffUtil.calculateDiff(callback, false);
@@ -110,7 +111,7 @@ public class RxDiffUtilTest {
     }
 
     @Test
-    public void calculateDiff_callback2() throws Exception {
+    public void calculateDiff_callback2() {
         Object o = 1;
 
         RxDiffResult rxDiffResult = rxDiffUtil.calculateDiff(function, callback2);
@@ -129,7 +130,7 @@ public class RxDiffUtilTest {
     }
 
     @Test
-    public void calculateDiff_callback2_detectMoves() throws Exception {
+    public void calculateDiff_callback2_detectMoves() {
         Object o = 1;
 
         RxDiffResult rxDiffResult = rxDiffUtil.calculateDiff(function, callback2, false);
@@ -148,7 +149,7 @@ public class RxDiffUtilTest {
     }
 
     @Test
-    public void with() throws Exception {
+    public void with() {
         assertThat(RxDiffUtil.with(adapter), instanceOf(ToRxDiffUtil.class));
     }
 }

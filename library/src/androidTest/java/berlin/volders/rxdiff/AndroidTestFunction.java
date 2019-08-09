@@ -20,6 +20,7 @@ import rx.Completable;
 import rx.Observable;
 import rx.functions.Func1;
 
+@SuppressWarnings("WeakerAccess")
 class AndroidTestFunction<T> implements Func1<Observable<T>, Completable> {
 
     final AndroidTestAdapter<T> adapter;

@@ -27,6 +27,7 @@ import rx.functions.Func1;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
+@SuppressWarnings("unchecked")
 @RunWith(MockitoJUnitRunner.class)
 public class RxDiffUtilCallback1Test {
 
@@ -36,7 +37,8 @@ public class RxDiffUtilCallback1Test {
     Func1 function;
 
     @Test
-    public void diffUtilCallback() throws Exception {
+    @SuppressWarnings("ConstantConditions")
+    public void diffUtilCallback() {
         RxDiffUtilCallback1 callback = new RxDiffUtilCallback1(function, callback2);
 
         callback.diffUtilCallback(null, null);

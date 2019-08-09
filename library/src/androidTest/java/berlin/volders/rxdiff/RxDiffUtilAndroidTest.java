@@ -29,6 +29,7 @@ import rx.Observable;
 import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 public class RxDiffUtilAndroidTest {
 
     static final Func1<List<String>, Integer> listSize = new Func1<List<String>, Integer>() {
@@ -59,7 +60,7 @@ public class RxDiffUtilAndroidTest {
     }
 
     @Test
-    public void applyDiff_empty() throws Exception {
+    public void applyDiff_empty() {
         adapter.subscribe(subscriber);
         Observable.from(values)
                 .first()
@@ -73,7 +74,7 @@ public class RxDiffUtilAndroidTest {
     }
 
     @Test
-    public void applyDiff_full() throws Exception {
+    public void applyDiff_full() {
         adapter.subscribe(subscriber);
         Observable.from(values)
                 .skip(1)
@@ -87,7 +88,7 @@ public class RxDiffUtilAndroidTest {
     }
 
     @Test
-    public void applyDiff_full_full() throws Exception {
+    public void applyDiff_full_full() {
         adapter.subscribe(subscriber);
         Observable.from(values)
                 .skip(1)
@@ -102,7 +103,7 @@ public class RxDiffUtilAndroidTest {
     }
 
     @Test
-    public void applyDiff_full_empty() throws Exception {
+    public void applyDiff_full_empty() {
         adapter.subscribe(subscriber);
         Observable.from(values)
                 .skip(2)
@@ -117,7 +118,7 @@ public class RxDiffUtilAndroidTest {
     }
 
     @Test
-    public void applyDiff_stream() throws Exception {
+    public void applyDiff_stream() {
         adapter.subscribe(subscriber);
         Observable.from(values)
                 .to(rxDiff)
@@ -126,11 +127,11 @@ public class RxDiffUtilAndroidTest {
 
         subscriber.assertNoErrors();
         subscriber.assertCompleted();
-        subscriber.assertValues(values.toArray(new List[values.size()]));
+        subscriber.assertValues(values.toArray(new List[0]));
     }
 
     @Test
-    public void applyDiff_concurrently() throws Exception {
+    public void applyDiff_concurrently() {
         rxDiff = applyDiff(adapter, adapter.notifyOnGet());
 
         adapter.subscribe(subscriber);

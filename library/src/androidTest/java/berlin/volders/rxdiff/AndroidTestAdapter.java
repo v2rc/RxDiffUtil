@@ -16,20 +16,22 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import rx.Observer;
 import rx.functions.Action2;
 import rx.functions.Func1;
 import rx.subjects.ReplaySubject;
 
-import static android.support.test.InstrumentationRegistry.getContext;
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 
+@SuppressWarnings("WeakerAccess")
 class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
         Func1<AndroidTestAdapter<T>, T>, Action2<AndroidTestAdapter<T>, T>,
         RxDiffUtil.Callback<AndroidTestAdapter<T>, T>, RxDiffUtil.Callback2<T> {
@@ -42,14 +44,15 @@ class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.sizeOf = sizeOf;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RecyclerView.ViewHolder(new View(getContext())) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new RecyclerView.ViewHolder(new View(getApplicationContext())) {
         };
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     }
 
     @Override

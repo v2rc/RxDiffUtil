@@ -1,4 +1,5 @@
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
+wrapper {
+    gradleVersion '5.5.1'
+    distributionType Wrapper.DistributionType.ALL
 }
 defaultTasks 'wrapper'

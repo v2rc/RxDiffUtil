@@ -16,11 +16,11 @@
 
 package berlin.volders.rxdiff;
 
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.util.DiffUtil.DiffResult;
-import android.support.v7.widget.RecyclerView.Adapter;
-import android.support.v7.widget.RecyclerView.AdapterDataObserver;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.DiffUtil.DiffResult;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
 import java.lang.ref.WeakReference;
 import java.util.ConcurrentModificationException;
@@ -34,8 +34,7 @@ class OnCalculateDiffResult<A extends Adapter, T> extends AdapterDataObserver {
     @VisibleForTesting
     boolean invalidated = false;
 
-    @VisibleForTesting
-    final Producer p;
+    private final Producer p;
     @VisibleForTesting
     final WeakReference<A> adapter;
     @VisibleForTesting
