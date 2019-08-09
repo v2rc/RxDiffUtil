@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff;
+package berlin.volders.rxdiff2;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.DiffUtil.DiffResult;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
@@ -25,16 +24,16 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import java.lang.ref.WeakReference;
 import java.util.ConcurrentModificationException;
 
-import berlin.volders.rxdiff.RxDiffUtil.Callback;
-import rx.Producer;
-import rx.functions.Action2;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.BiFunction;
+
+import static androidx.recyclerview.widget.DiffUtil.Callback;
+import static androidx.recyclerview.widget.DiffUtil.calculateDiff;
 
 class OnCalculateDiffResult<A extends Adapter, T> extends AdapterDataObserver {
 
-    @VisibleForTesting
-    boolean invalidated = false;
-
-    private final Producer p;
+    private final Action p;
     @VisibleForTesting
     final WeakReference<A> adapter;
     @VisibleForTesting
@@ -42,22 +41,26 @@ class OnCalculateDiffResult<A extends Adapter, T> extends AdapterDataObserver {
     @VisibleForTesting
     final DiffResult diff;
 
-    OnCalculateDiffResult(WeakReference<A> adapter, T o, Callback<A, T> cb, boolean dm, Producer p) {
+    @VisibleForTesting
+    boolean invalidated = false;
+
+    OnCalculateDiffResult(WeakReference<A> adapter, T o, BiFunction<A, T, Callback> cb,
+                          boolean dm, Action p) throws Exception {
         this.adapter = adapter;
         A a = nonLeaking(adapter);
         a.registerAdapterDataObserver(this);
-        DiffUtil.Callback callback = cb.diffUtilCallback(a, o);
+        Callback callback = cb.apply(a, o);
         this.o = o;
-        this.diff = DiffUtil.calculateDiff(callback, dm);
+        this.diff = calculateDiff(callback, dm);
         this.p = p;
     }
 
-    void applyDiff(Action2<? super A, ? super T> onUpdate) {
+    void applyDiff(BiConsumer<? super A, ? super T> onUpdate) throws Exception {
         A adapter = nonLeaking(this.adapter);
         checkConcurrency(adapter);
-        onUpdate.call(adapter, o);
+        onUpdate.accept(adapter, o);
         diff.dispatchUpdatesTo(adapter);
-        p.request(1);
+        p.run();
     }
 
     @VisibleForTesting

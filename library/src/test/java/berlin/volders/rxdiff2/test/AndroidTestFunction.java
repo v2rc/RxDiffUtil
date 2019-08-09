@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff.test;
+package berlin.volders.rxdiff2.test;
 
-import berlin.volders.rxdiff.RxDiffUtil;
-import rx.Completable;
-import rx.Observable;
-import rx.functions.Func1;
+import berlin.volders.rxdiff2.RxDiffUtil;
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
 
-public class AndroidTestFunction<T> implements Func1<Observable<T>, Completable> {
+public class AndroidTestFunction<T> implements Function<Flowable<T>, Completable> {
 
     private final AndroidTestAdapter<T> adapter;
-    private final Func1<AndroidTestAdapter<T>, T> object;
+    private final Function<AndroidTestAdapter<T>, T> object;
 
-    public AndroidTestFunction(AndroidTestAdapter<T> adapter, Func1<AndroidTestAdapter<T>, T> object) {
+    public AndroidTestFunction(AndroidTestAdapter<T> adapter, Function<AndroidTestAdapter<T>, T> object) {
         this.adapter = adapter;
         this.object = object;
     }
 
     @Override
-    public Completable call(Observable<T> o) {
-        return o.to(RxDiffUtil.<AndroidTestAdapter<T>, T>with(adapter))
+    public Completable apply(Flowable<T> o) {
+        return o.to(RxDiffUtil.with(adapter))
                 .calculateDiff(object, adapter)
                 .applyDiff(adapter);
     }

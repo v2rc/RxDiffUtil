@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package berlin.volders.rxdiff;
+package berlin.volders.rxdiff2;
 
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import org.junit.Before;
@@ -28,14 +27,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.lang.ref.WeakReference;
 import java.util.ConcurrentModificationException;
 
-import berlin.volders.rxdiff.RxDiffUtil.Callback;
-import rx.Producer;
-import rx.functions.Actions;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.BiFunction;
 
+import static androidx.recyclerview.widget.DiffUtil.Callback;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -46,32 +45,34 @@ public class OnCalculateDiffResultTest {
     @Mock
     Adapter adapter;
     @Mock
-    Callback callback;
+    BiFunction callback;
     @Mock
-    Producer producer;
+    Action producer;
     @Mock
-    DiffUtil.Callback cb;
+    Callback cb;
+    @Mock
+    BiConsumer empty;
 
     OnCalculateDiffResult<?, ?> result;
 
     @Before
-    public void setup() {
-        doReturn(cb).when(callback).diffUtilCallback(any(Adapter.class), any());
+    public void setup() throws Exception {
+        doReturn(cb).when(callback).apply(any(Adapter.class), any());
         result = new OnCalculateDiffResult<>(new WeakReference<>(adapter), null, callback, false, producer);
     }
 
     @Test
-    public void applyDiff() {
-        result.applyDiff(Actions.empty());
+    public void applyDiff() throws Exception {
+        result.applyDiff(empty);
 
-        verify(producer).request(anyLong());
+        verify(producer).run();
     }
 
     @Test(expected = ConcurrentModificationException.class)
-    public void applyDiff_concurrently() {
+    public void applyDiff_concurrently() throws Exception {
         result.onChanged();
 
-        result.applyDiff(Actions.empty());
+        result.applyDiff(empty);
     }
 
     @Test

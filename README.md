@@ -3,12 +3,13 @@
 [![Build][1]][2]
 [![Release][3]][4]
 [![Coverage][5]][6]
+[![Versions][7]][8]
 
 *RxDiffUtil* is an Rx wrapper around the Android [DiffUtil] library for the
 `RecyclerView` widget. It handles threading and reacts to concurrent changes
 to the adapter with a `ConcurrentModificationException`.
 
-All computation is done on the thread defined by the upstream `Observable`,
+All computation is done on the thread defined by the upstream `Flowable`,
 while the application of the diff result and all terminal events are
 propagated on the Android main thread.
 
@@ -19,12 +20,11 @@ the subscription to reduce concurrent changes to the adapter.
 Usage
 -----
 
-Convert any `Observable` to a `Completable` applying all changes as diff to the
+Convert any `Flowable` to a `Completable` applying all changes as diff to the
 provided adapter.
 
     service.observeData()
            .subscribeOn(Schedulers.compute())
-           .onBackpressureLatest()
            .to(RxDiffUtil.with(adapter))
            .calculateDiff(callback))
            .applyDiff(AdapterImpl::setUnsafe)
@@ -42,6 +42,7 @@ Add [JitPack][4] to your repositories and *RxDiffUtil* to the dependencies
 License
 -------
 
+    Copyright (C) 2018 Christian Schmitz
     Copyright (C) 2017 volders GmbH with <3 in Berlin
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,10 +58,12 @@ License
     limitations under the License.
 
 
-  [1]: https://travis-ci.org/v2rc/RxDiffUtil.svg?branch=1.x
+  [1]: https://travis-ci.org/v2rc/RxDiffUtil.svg
   [2]: https://travis-ci.org/v2rc/RxDiffUtil
   [3]: https://jitpack.io/v/v2rc/rxdiffutil.svg
   [4]: https://jitpack.io/#v2rc/rxdiffutil
-  [5]: https://codecov.io/gh/v2rc/RxDiffUtil/branch/1.x/graph/badge.svg
+  [5]: https://codecov.io/gh/v2rc/RxDiffUtil/badge.svg
   [6]: https://codecov.io/gh/v2rc/RxDiffUtil
+  [7]: https://asapi.herokuapp.com/com.github.v2rc/rxdiffutil@svg
+  [8]: https://asapi.herokuapp.com/com.github.v2rc/rxdiffutil
   [DiffUtil]: https://developer.android.com/reference/android/support/v7/util/DiffUtil.html
