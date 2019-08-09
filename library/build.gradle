@@ -10,12 +10,6 @@ android {
         minSdkVersion 14
         targetSdkVersion 29
     }
-
-    buildTypes {
-        debug {
-            testCoverageEnabled true
-        }
-    }
 }
 
 dependencies {

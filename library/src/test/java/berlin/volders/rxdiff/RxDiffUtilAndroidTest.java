@@ -33,6 +33,8 @@ import rx.Observable;
 import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
+import static rx.observers.TestSubscriber.create;
+
 @SuppressWarnings({"unchecked", "WeakerAccess"})
 @RunWith(RobolectricTestRunner.class)
 public class RxDiffUtilAndroidTest {
@@ -61,7 +63,7 @@ public class RxDiffUtilAndroidTest {
     public void setup() {
         adapter = new AndroidTestAdapter<>(listSize);
         rxDiff = applyDiff(adapter, adapter);
-        subscriber = TestSubscriber.create();
+        subscriber = create();
     }
 
     @Test

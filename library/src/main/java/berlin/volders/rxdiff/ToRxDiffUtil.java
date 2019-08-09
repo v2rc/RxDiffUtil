@@ -16,7 +16,6 @@
 
 package berlin.volders.rxdiff;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.ref.WeakReference;
@@ -26,8 +25,7 @@ import rx.functions.Func1;
 
 class ToRxDiffUtil<A extends RecyclerView.Adapter, T> implements Func1<Observable<T>, RxDiffUtil<A, T>> {
 
-    @VisibleForTesting
-    final WeakReference<A> adapter;
+    private final WeakReference<A> adapter;
 
     ToRxDiffUtil(A adapter) {
         this.adapter = new WeakReference<>(adapter);

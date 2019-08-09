@@ -6,8 +6,8 @@ git:
 
 branches:
   only:
-    - 2.x
-    - 1.x
+    - master
+    - legacy
     - dev
 
 

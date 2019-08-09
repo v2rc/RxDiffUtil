@@ -18,7 +18,6 @@ package berlin.volders.rxdiff;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
@@ -34,8 +33,7 @@ import rx.functions.Func1;
 class RxDiffUtilCallback1<A extends Adapter, T> implements Callback<A, T> {
 
     private final Func1<? super A, ? extends T> o;
-    @VisibleForTesting
-    final Callback2<T> cb;
+    private final Callback2<T> cb;
 
     RxDiffUtilCallback1(Func1<? super A, ? extends T> o, Callback2<T> cb) {
         this.o = o;

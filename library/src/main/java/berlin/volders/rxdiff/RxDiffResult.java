@@ -37,7 +37,6 @@ import rx.functions.Action2;
  * @param <T> type of the data set
  * @param <A> type of the adapter
  */
-@SuppressWarnings("WeakerAccess")
 public class RxDiffResult<A extends RecyclerView.Adapter, T> {
 
     @VisibleForTesting

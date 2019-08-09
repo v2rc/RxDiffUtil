@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
 import berlin.volders.rxdiff.RxDiffUtil;
 import rx.Observer;
@@ -30,13 +29,16 @@ import rx.functions.Action2;
 import rx.functions.Func1;
 import rx.subjects.ReplaySubject;
 
+import static androidx.recyclerview.widget.RecyclerView.Adapter;
+import static androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+import static rx.subjects.ReplaySubject.create;
 
-public class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
+public class AndroidTestAdapter<T> extends Adapter<ViewHolder> implements
         Func1<AndroidTestAdapter<T>, T>, Action2<AndroidTestAdapter<T>, T>,
         RxDiffUtil.Callback<AndroidTestAdapter<T>, T>, RxDiffUtil.Callback2<T> {
 
-    private final ReplaySubject<T> ts = ReplaySubject.create();
+    private final ReplaySubject<T> ts = create();
     private final Func1<T, Integer> sizeOf;
 
     public AndroidTestAdapter(Func1<T, Integer> sizeOf) {
@@ -46,13 +48,13 @@ public class AndroidTestAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecyclerView.ViewHolder(new View(getApplicationContext())) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(new View(getApplicationContext())) {
         };
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     }
 
     @Override

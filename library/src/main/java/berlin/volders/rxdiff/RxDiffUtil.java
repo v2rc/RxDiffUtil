@@ -48,7 +48,7 @@ import rx.functions.Func1;
 @SuppressWarnings("WeakerAccess")
 public class RxDiffUtil<A extends Adapter, T> {
 
-    final WeakReference<A> adapter;
+    private final WeakReference<A> adapter;
     private final Observable<T> o;
 
     RxDiffUtil(WeakReference<A> adapter, Observable<T> o) {

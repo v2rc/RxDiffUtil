@@ -3,6 +3,7 @@
 [![Build][1]][2]
 [![Release][3]][4]
 [![Coverage][5]][6]
+[![Versions][7]][8]
 
 *RxDiffUtil* is an Rx wrapper around the Android [DiffUtil] library for the
 `RecyclerView` widget. It handles threading and reacts to concurrent changes
@@ -42,6 +43,7 @@ Add [JitPack][4] to your repositories and *RxDiffUtil* to the dependencies
 License
 -------
 
+    Copyright (C) 2018 Christian Schmitz
     Copyright (C) 2017 volders GmbH with <3 in Berlin
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,10 +59,12 @@ License
     limitations under the License.
 
 
-  [1]: https://travis-ci.org/v2rc/RxDiffUtil.svg?branch=1.x
+  [1]: https://travis-ci.org/v2rc/RxDiffUtil.svg?branch=legacy
   [2]: https://travis-ci.org/v2rc/RxDiffUtil
   [3]: https://jitpack.io/v/v2rc/rxdiffutil.svg
   [4]: https://jitpack.io/#v2rc/rxdiffutil
-  [5]: https://codecov.io/gh/v2rc/RxDiffUtil/branch/1.x/graph/badge.svg
+  [5]: https://codecov.io/gh/v2rc/RxDiffUtil/branch/legacy/graph/badge.svg
   [6]: https://codecov.io/gh/v2rc/RxDiffUtil
+  [7]: https://asapi.herokuapp.com/com.github.v2rc/rxdiffutil/1.+@svg
+  [8]: https://asapi.herokuapp.com/com.github.v2rc/rxdiffutil/1.+
   [DiffUtil]: https://developer.android.com/reference/android/support/v7/util/DiffUtil.html
